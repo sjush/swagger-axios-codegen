@@ -183,6 +183,7 @@ interface IRequestSchema {
   method: string
   contentType: string
   path: string
+  rawPath: string
   pathReplace: string
   parsedParameters: any
   formData: string
@@ -198,6 +199,7 @@ export function requestTemplate(name: string, requestSchema: IRequestSchema, opt
     method = '',
     contentType = 'multipart/form-data',
     path = '',
+    rawPath = '',
     pathReplace = '',
     parsedParameters = <any>{},
     formData = '',
@@ -216,6 +218,7 @@ export function requestTemplate(name: string, requestSchema: IRequestSchema, opt
   return `
 /**
  * ${summary || ''}
+ * @url ${rawPath || path}
  */
 ${options.useStaticMethod ? 'static' : ''} ${camelcase(
     name

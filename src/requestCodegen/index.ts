@@ -128,6 +128,7 @@ export function requestCodegen(paths: IPaths, isV3: boolean, options: ISwaggerOp
           requestSchema: {
             summary: reqProps.summary,
             path,
+            rawPath,
             pathReplace,
             parameters,
             parsedParameters,
