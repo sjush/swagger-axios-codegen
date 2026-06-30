@@ -18,12 +18,12 @@
   ],
   "scripts": {
     "build": "tsc -p ./src",
-    "prestart": "npm run build",
+    "prestart": "pnpm run build",
     "precommit": "prettier --write --config .prettierrc ./src/*.ts",
     "start": "node ./dist/index",
     "watch": "tsc --watch -p ./src ",
-    "prepublish": "npm run build",
-    "prepublishOnly": "npm run build"
+    "prepublish": "pnpm run build",
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "axios": "^0.21.2",
