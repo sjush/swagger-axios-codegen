@@ -15,7 +15,9 @@ function requestCodegen(paths, isV3, options) {
     var _a, _b, _c, _d;
     const requestClasses = {};
     if (!!paths)
-        for (const [path, request] of Object.entries(paths)) {
+        for (const [rawPath, request] of Object.entries(paths)) {
+            // 剥离 RFC 6570 查询/片段模板展开（如 `{?cascade}`），见 src/requestCodegen/index.ts
+            const path = rawPath.replace(/\{[?&#][^}]*\}/g, '');
             let methodName = (0, utils_1.getMethodName)(path);
             for (const [method, reqProps] of Object.entries(request)) {
                 methodName =

@@ -23,7 +23,11 @@ export function requestCodegen(paths: IPaths, isV3: boolean, options: ISwaggerOp
   const requestClasses: IRequestClass = {}
 
   if (!!paths)
-    for (const [path, request] of Object.entries(paths)) {
+    for (const [rawPath, request] of Object.entries(paths)) {
+      // 剥离 RFC 6570 查询/片段模板展开（如 `{?cascade}`、`{&foo,bar}`、`{#frag}`），
+      // 这些不是真正的 URL 路径，原样保留会被编码成 `%7B?cascade}` 导致 400。
+      // 真正的查询参数通过 configs.params 单独传，路径参数 `{id}` 不以 ?/&/# 开头，不受影响。
+      const path = rawPath.replace(/\{[?&#][^}]*\}/g, '')
       let methodName = getMethodName(path)
       for (const [method, reqProps] of Object.entries(request)) {
         methodName =
