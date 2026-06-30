@@ -28,16 +28,17 @@ export function requestCodegen(paths: IPaths, isV3: boolean, options: ISwaggerOp
       // 这些不是真正的 URL 路径，原样保留会被编码成 `%7B?cascade}` 导致 400。
       // 真正的查询参数通过 configs.params 单独传，路径参数 `{id}` 不以 ?/&/# 开头，不受影响。
       const path = rawPath.replace(/\{[?&#][^}]*\}/g, '')
-      let methodName = getMethodName(path)
+      // let methodName = getMethodName(path)
+      let methodName = getMethodName(rawPath)   // 用原始 path 生成名字，保持命名稳定
       for (const [method, reqProps] of Object.entries(request)) {
         methodName =
           options.methodNameMode === 'operationId'
             ? reqProps.operationId
             : options.methodNameMode === 'shortOperationId'
-            ? trimSuffix(reqProps.operationId, reqProps.tags?.[0])
-            : typeof options.methodNameMode === 'function'
-            ? options.methodNameMode(reqProps)
-            : methodName
+              ? trimSuffix(reqProps.operationId, reqProps.tags?.[0])
+              : typeof options.methodNameMode === 'function'
+                ? options.methodNameMode(reqProps)
+                : methodName
         if (!methodName) {
           // console.warn('method Name is null：', path);
           continue
