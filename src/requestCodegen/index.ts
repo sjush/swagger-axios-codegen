@@ -24,12 +24,8 @@ export function requestCodegen(paths: IPaths, isV3: boolean, options: ISwaggerOp
 
   if (!!paths)
     for (const [rawPath, request] of Object.entries(paths)) {
-      // 剥离 RFC 6570 查询/片段模板展开（如 `{?cascade}`、`{&foo,bar}`、`{#frag}`），
-      // 这些不是真正的 URL 路径，原样保留会被编码成 `%7B?cascade}` 导致 400。
-      // 真正的查询参数通过 configs.params 单独传，路径参数 `{id}` 不以 ?/&/# 开头，不受影响。
       const path = rawPath.replace(/\{[?&#][^}]*\}/g, '')
-      // let methodName = getMethodName(path)
-      let methodName = getMethodName(rawPath)   // 用原始 path 生成名字，保持命名稳定
+      let methodName = getMethodName(rawPath)
       for (const [method, reqProps] of Object.entries(request)) {
         methodName =
           options.methodNameMode === 'operationId'
