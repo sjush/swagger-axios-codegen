@@ -16,9 +16,8 @@ function requestCodegen(paths, isV3, options) {
     const requestClasses = {};
     if (!!paths)
         for (const [rawPath, request] of Object.entries(paths)) {
-            // 剥离 RFC 6570 查询/片段模板展开（如 `{?cascade}`），见 src/requestCodegen/index.ts
             const path = rawPath.replace(/\{[?&#][^}]*\}/g, '');
-            let methodName = (0, utils_1.getMethodName)(path);
+            let methodName = (0, utils_1.getMethodName)(rawPath);
             for (const [method, reqProps] of Object.entries(request)) {
                 methodName =
                     options.methodNameMode === 'operationId'
