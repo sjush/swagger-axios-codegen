@@ -146,7 +146,7 @@ function typeTemplate(name, typeString, prefix) {
 exports.typeTemplate = typeTemplate;
 /** requestTemplate */
 function requestTemplate(name, requestSchema, options) {
-    let { summary = '', parameters = '', responseType = '', method = '', contentType = 'multipart/form-data', path = '', pathReplace = '', parsedParameters = {}, formData = '', requestBody = null } = requestSchema;
+    let { summary = '', parameters = '', responseType = '', method = '', contentType = 'multipart/form-data', path = '', rawPath = '', pathReplace = '', parsedParameters = {}, formData = '', requestBody = null } = requestSchema;
     const { useClassTransformer } = options;
     const { queryParameters = [], bodyParameter = [], headerParameters } = parsedParameters;
     const nonArrayType = responseType.replace('[', '').replace(']', '');
@@ -158,6 +158,7 @@ function requestTemplate(name, requestSchema, options) {
     return `
 /**
  * ${summary || ''}
+ * @url ${rawPath || path}
  */
 ${options.useStaticMethod ? 'static' : ''} ${(0, camelcase_1.default)(name)}(${parameters}options:IRequestOptions={}):Promise<${responseType}> {
   return new Promise((resolve, reject) => {

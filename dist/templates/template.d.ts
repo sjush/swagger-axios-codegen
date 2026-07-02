@@ -20,6 +20,7 @@ interface IRequestSchema {
     method: string;
     contentType: string;
     path: string;
+    rawPath: string;
     pathReplace: string;
     parsedParameters: any;
     formData: string;

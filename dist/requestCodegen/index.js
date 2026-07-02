@@ -104,6 +104,7 @@ function requestCodegen(paths, isV3, options) {
                     requestSchema: {
                         summary: reqProps.summary,
                         path,
+                        rawPath,
                         pathReplace,
                         parameters,
                         parsedParameters,

@@ -9,7 +9,7 @@ A swagger client uses axios and typescript
 
 require node > v8.0.0
 
-it will always resolve `axios.response.data` or reject `axios.error` with Promise
+it will resolve the full `axios.response` (data is no longer unwrapped) or reject `axios.error` with Promise
 
 support other similar to `axios` library, for example [Fly.js](https://github.com/wendux/fly), required setting `ISwaggerOptions.useCustomerRequestInstance = true`
 
