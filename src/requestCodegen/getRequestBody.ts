@@ -1,10 +1,9 @@
 import { IRequestBody } from "../swaggerInterfaces";
-import { isNullOrUndefined } from "util";
 import { refClassName } from "../utils";
 
 export function getRequestBody(requestBody: IRequestBody) {
   // 如果是空则直接反回
-  if (isNullOrUndefined(requestBody.content)) return
+  if (requestBody.content == null) return
 
   let imports: string[] = []
   let bodyType = ''

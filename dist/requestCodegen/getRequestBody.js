@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRequestBody = void 0;
-const util_1 = require("util");
 const utils_1 = require("../utils");
 function getRequestBody(requestBody) {
     // 如果是空则直接反回
-    if ((0, util_1.isNullOrUndefined)(requestBody.content))
+    if (requestBody.content == null)
         return;
     let imports = [];
     let bodyType = '';
