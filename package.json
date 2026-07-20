@@ -6,7 +6,7 @@
   "author": "Manwei Leung <mic.liangwenwei@foxmail.com>",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/Manweill/swagger-axios-codegen.git",
+    "url": "https://github.com/sjush/swagger-axios-codegen.git",
     "type": "git"
   },
   "keywords": [
